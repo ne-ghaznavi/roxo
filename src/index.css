@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: "IRANSansWeb";
+  src: url("./assets/fonts/IRANSansWeb.woff");
+}
+
+@font-face {
+  font-family: "laSolid";
+  src: url("./assets/fonts/la-solid-900.woff");
+}
