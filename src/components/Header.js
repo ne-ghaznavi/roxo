@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Hamburger from "hamburger-react";
 import { NavLink } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 
 // icons
 import { CiSearch } from "react-icons/ci";
@@ -15,6 +16,7 @@ import logo from "../assets/images/logo.png";
 import { topMenuLinks, menuLinks } from "../data/dummyData";
 
 function Header() {
+  const userState = useSelector((state) => state.user);
   const [isOpen, setOpen] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
 
@@ -97,19 +99,22 @@ function Header() {
                 <BsCart />
               </div>
             </div>
-            <NavLink
-              to="/login"
-              className="w-32 h-8 border border-[#c4c2dd] rounded-sm flex text-sm items-center gap-1 justify-center hover:text-white mr-2"
-            >
-              <AiOutlineUser size={22} />
-              <span>ورود | ثبت نام</span>
-            </NavLink>
-            {/* <div className="flex items-center justify-center rounded-tl-md rounded-tr-md w-12 h-9 hover:bg-[#37287b]">
-              <div className="flex items-end">
-                <IoMdArrowDropdown className="text-sm" />
-                <AiOutlineUser />
+            {userState.login ? (
+              <div className="flex items-center justify-center rounded-tl-md rounded-tr-md w-12 h-9 hover:bg-[#37287b]">
+                <div className="flex items-end">
+                  <IoMdArrowDropdown className="text-sm" />
+                  <AiOutlineUser />
+                </div>
               </div>
-            </div> */}
+            ) : (
+              <NavLink
+                to="/login"
+                className="w-32 h-8 border border-[#c4c2dd] rounded-sm flex text-sm items-center gap-1 justify-center hover:text-white mr-2"
+              >
+                <AiOutlineUser size={22} />
+                <span>ورود | ثبت نام</span>
+              </NavLink>
+            )}
           </div>
         </div>
       </div>

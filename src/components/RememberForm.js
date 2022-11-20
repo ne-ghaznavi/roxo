@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
 import { useFormik } from "formik";
+import { useSelector } from "react-redux";
 
-function RememberForm({close}) {
-
+function RememberForm({ close }) {
+  const userState = useSelector((state) => state.user);
   const validate = (values) => {
     const errors = {};
 
@@ -22,7 +22,9 @@ function RememberForm({close}) {
     },
     validate,
     onSubmit: (values) => {
-      console.log(values);
+      if (values.mobile == userState.mobile) {
+        console.log(userState.password);
+      }
     },
   });
   return (

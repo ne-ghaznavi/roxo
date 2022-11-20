@@ -1,27 +1,34 @@
 import React, { useState } from "react";
 import { useFormik } from "formik";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { login } from "../features/user/userSlice";
 
 import loginLogo from "../assets/images/login.svg";
 
+// Components
 import { RememberForm } from ".";
 
 const LoginForm = () => {
+  const userState = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [rememberPassword, setRememberPassword] = useState(false);
 
   const validate = (values) => {
     const errors = {};
 
-      if (!values.userName) {
-        errors.userName = "نام کاربری را وارد کنید";
-      } else if (values.userName.length !== 11) {
-        errors.userName = "شماره موبایل وارد شده نادرست است";
-      }
+    if (!values.userName) {
+      errors.userName = "نام کاربری را وارد کنید";
+    } else if (values.userName.length !== 11) {
+      errors.userName = "شماره موبایل وارد شده نادرست است";
+    }
 
-      if (!values.password) {
-        errors.password = "رمز عبور خود را وارد کنید";
-      } else if (values.password.length < 5) {
-        errors.password = "رمز عبور حداقل باید شامل 5 کاراکتر باشد";
-      }
+    if (!values.password) {
+      errors.password = "رمز عبور خود را وارد کنید";
+    } else if (values.password.length < 5) {
+      errors.password = "رمز عبور حداقل باید شامل 5 کاراکتر باشد";
+    }
 
     return errors;
   };
@@ -33,13 +40,21 @@ const LoginForm = () => {
     },
     validate,
     onSubmit: (values) => {
-      console.log(values);
+      if (
+        values.userName == userState.mobile &&
+        values.password == userState.password
+      ) {
+        dispatch(login(true))
+        navigate("/");
+      }
     },
   });
 
   const rememberPasswordHandler = () => {
     setRememberPassword(!rememberPassword);
   };
+
+  console.log(userState);
 
   return (
     <div className="md:w-5/12">
@@ -51,12 +66,9 @@ const LoginForm = () => {
           <img src={loginLogo} alt="login" className="w-16 h-16" />
         </div>
         {rememberPassword ? (
-          <RememberForm close={setRememberPassword}/>
+          <RememberForm close={setRememberPassword} />
         ) : (
-          <form
-            className="mb-5 text-center"
-            onSubmit={formik.handleSubmit}
-          >
+          <form className="mb-5 text-center" onSubmit={formik.handleSubmit}>
             <input
               type="text"
               id="userName"

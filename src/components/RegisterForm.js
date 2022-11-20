@@ -1,9 +1,13 @@
 import React from "react";
 import { useFormik } from "formik";
+import { useDispatch } from "react-redux";
+import { register } from "../features/user/userSlice";
 
 import registerLogo from "../assets/images/register.svg";
 
 const RegisterForm = () => {
+  const dispatch = useDispatch();
+
   const validate = (values) => {
     const errors = {};
 
@@ -41,15 +45,15 @@ const RegisterForm = () => {
 
     if (!values.password) {
       errors.password = "رمز عبور را وارد کنید";
-    } else if (values.password < 6 ) {
+    } else if (values.password < 6) {
       errors.password = "رمز عبور حداقل باید شامل 6 کاراکتر باشد";
     }
 
     if (!values.confirmPassword) {
-        errors.confirmPassword = "تکرار رمز عبور را وارد کنید";
-      } else if (values.confirmPassword !== values.password) {
-        errors.confirmPassword = "رمز عبور شما یکسان نیست";
-      }
+      errors.confirmPassword = "تکرار رمز عبور را وارد کنید";
+    } else if (values.confirmPassword !== values.password) {
+      errors.confirmPassword = "رمز عبور شما یکسان نیست";
+    }
 
     return errors;
   };
@@ -66,7 +70,7 @@ const RegisterForm = () => {
     },
     validate,
     onSubmit: (values) => {
-      console.log(values);
+      dispatch(register(values));
     },
   });
 
