@@ -2,18 +2,15 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 
 // pages
-import Register from "./pages/Register";
-
-// components
-import { Header } from "./components";
-
+import Home from "./pages/Home";
+import Login from "./pages/Login";
 
 function App() {
   return (
     <div className="App font-IRANSansWeb">
-      <Header/>
       <Routes>
-        <Route path="/register" element={<Register/>}/>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </div>
   );

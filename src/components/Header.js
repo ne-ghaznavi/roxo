@@ -25,7 +25,9 @@ function Header() {
   return (
     <header>
       <div className="h-16 bg-[#4942a2] flex gap-2 items-center justify-between px-5 py-4 lg:hidden relative">
-        <img src={logo} alt="roxo logo" />
+        <NavLink to="/">
+          <img src={logo} alt="roxo logo" />
+        </NavLink>
         <div className="flex flex-1 items-center justify-end gap-2 text-3xl text-[#C4C2DD]">
           <CiSearch className="font-extrabold" />
           <AiOutlineUser />
@@ -59,7 +61,9 @@ function Header() {
       </div>
       <div className="hidden lg:flex bg-[#4942a2]  px-8 items-center justify-center">
         <div className="w-full max-w-screen-xl flex items-center justify-between gap-3">
-          <img src={logo} alt="roxo logo" className="w-20 h-6" />
+          <NavLink to="/">
+            <img src={logo} alt="roxo logo" className="w-20 h-6" />
+          </NavLink>
           <div className="flex flex-1">
             <ul className="flex items-center">
               {menuLinks.map((item, index) => (
@@ -93,7 +97,10 @@ function Header() {
                 <BsCart />
               </div>
             </div>
-            <NavLink to="register" className="w-32 h-8 border border-[#c4c2dd] rounded-sm flex text-sm items-center gap-1 justify-center hover:text-white mr-2">
+            <NavLink
+              to="/login"
+              className="w-32 h-8 border border-[#c4c2dd] rounded-sm flex text-sm items-center gap-1 justify-center hover:text-white mr-2"
+            >
               <AiOutlineUser size={22} />
               <span>ورود | ثبت نام</span>
             </NavLink>
