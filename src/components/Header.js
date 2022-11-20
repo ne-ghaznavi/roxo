@@ -93,7 +93,7 @@ function Header() {
                 <BsCart />
               </div>
             </div>
-            <NavLink className="w-32 h-8 border border-[#c4c2dd] rounded-sm flex text-sm items-center gap-1 justify-center hover:text-white mr-2">
+            <NavLink to="register" className="w-32 h-8 border border-[#c4c2dd] rounded-sm flex text-sm items-center gap-1 justify-center hover:text-white mr-2">
               <AiOutlineUser size={22} />
               <span>ورود | ثبت نام</span>
             </NavLink>
